@@ -35,4 +35,5 @@ ln -s $CONFIG_DIR $HOME/.dotfiles
 
 link-in-home bashrc
 link-in-home oh-my-bash
+link-in-home gitconfig
 

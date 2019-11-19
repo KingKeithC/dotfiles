@@ -1,0 +1,10 @@
+[user]
+	email = KingKeithC@gmail.com
+	name = Keith King
+[core]
+	autocrlf = false
+	whitespace = blank-at-eol,-blank-at-eof,space-before-tab,-indent-with-non-tab,tab-in-indent,-cr-at-eol
+	eol = lf
+
+[color]
+	ui = auto
