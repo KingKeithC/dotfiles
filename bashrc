@@ -1,5 +1,5 @@
 # Path to your oh-my-bash installation.
-export OSH=/home/keith/.oh-my-bash
+export OSH=${HOME}/.oh-my-bash
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
@@ -83,7 +83,7 @@ eval `keychain --eval --nogui ansibleagent keithking keysersoze`
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias bashconfig="mate ~/.bashrc"
+alias bashconfig="vim ~/.bashrc"
 # alias ohmybash="mate ~/.oh-my-bash"
 
 alias cl='clear'
