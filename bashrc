@@ -88,9 +88,14 @@ if which keychain &> /dev/null ; then
   fi
 fi
 
+# Environment Variables
+export EDITOR="vim"
+export PAGER="less"
+
 # Aliases
-alias bashconfig="vim ~/.bashrc"
+alias bashconfig="${EDITOR} ~/.bashrc"
 alias gitconfig="git config --global -e"
+alias localconfig="${EDITOR} ~/.localenv"
 alias cl='clear'
 alias refreshenv='source ~/.bashrc'
 
