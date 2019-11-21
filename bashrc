@@ -72,20 +72,25 @@ plugins=(
 
 source $OSH/oh-my-bash.sh
 
-export EDITOR='vim'
+# Load computer specific environment variables
+LOCAL_ENVIRONMENT_FILE="${HOME}/.localenv"
+if [ -f "$LOCAL_ENVIRONMENT_FILE" ]; then
+  source $LOCAL_ENVIRONMENT_FILE
+fi
 
-# ssh
-eval `keychain --eval --nogui ansibleagent keithking keysersoze`
+# Load SSH keys using Keychain
+if which keychain &> /dev/null ; then
+  if [ -n "$KEYCHAIN_KEYS" ]; then
+    echo "Loading Keychain Keys"
+    eval `keychain --quiet --eval --nogui --attempts 3 $KEYCHAIN_KEYS`
+  else
+    echo "Keychain is available, but the variable \$KEYCHAIN_KEYS was not set! Set the variable by editing ~/.localenv"
+  fi
+fi
 
-# Set personal aliases, overriding those provided by oh-my-bash libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-bash
-# users are encouraged to define aliases within the OSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
+# Aliases
 alias bashconfig="vim ~/.bashrc"
-# alias ohmybash="mate ~/.oh-my-bash"
-
+alias gitconfig="git config --global -e"
 alias cl='clear'
 alias refreshenv='source ~/.bashrc'
 

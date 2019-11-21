@@ -1,10 +1,16 @@
 [user]
-	email = KingKeithC@gmail.com
-	name = Keith King
+  email = KingKeithC@gmail.com
+  name = Keith King
 [core]
-	autocrlf = input
-	whitespace = blank-at-eol,-blank-at-eof,space-before-tab,-indent-with-non-tab,tab-in-indent,-cr-at-eol
-	eol = lf
-
+  autocrlf = input
+  whitespace = blank-at-eol,-blank-at-eof,space-before-tab,-indent-with-non-tab,tab-in-indent,-cr-at-eol
+  eol = native
 [color]
-	ui = auto
+  ui = auto
+[alias]
+  plog = "log --color --graph --abbrev-commit --all --decorate=short --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
+  ls = status
+  d = diff
+[push]
+  default = simple
+
