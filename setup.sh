@@ -34,4 +34,5 @@ echo "Begin dotfile setup..."
 link-in-home bashrc
 link-in-home oh-my-bash
 link-in-home gitconfig
+link-in-home vimrc
 
