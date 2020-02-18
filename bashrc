@@ -89,3 +89,7 @@ eval `keychain --eval --nogui ansibleagent keithking keysersoze`
 alias cl='clear'
 alias refreshenv='source ~/.bashrc'
 
+export GOPATH=/mnt/e/Development/
+
+# Add Go to the path
+export PATH=$PATH:/usr/local/go/bin
