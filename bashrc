@@ -98,8 +98,5 @@ alias gitconfig="git config --global -e"
 alias localconfig="${EDITOR} ~/.localenv"
 alias cl='clear'
 alias refreshenv='source ~/.bashrc'
+alias mcc='docker ps -q -f "name=abcraft_minecraft_1"'
 
-export GOPATH=/mnt/e/Development/
-
-# Add Go to the path
-export PATH=$PATH:/usr/local/go/bin
