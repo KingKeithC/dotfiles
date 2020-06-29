@@ -9,3 +9,7 @@ function start_ssh_agent
   end
 end
 
+function rm_dotfile_backups
+  rm -i ~/.~
+end
+
