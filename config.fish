@@ -13,3 +13,5 @@ function rm_dotfile_backups
   rm -i ~/.~
 end
 
+start_ssh_agent
+
