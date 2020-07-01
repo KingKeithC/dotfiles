@@ -10,7 +10,7 @@ echo "Performing Setup for DISTRO=$DISTRO"
 
 switch $DISTRO
 case Ubuntu
-  set PACKAGES "vim less git"
+  set PACKAGES "vim less git keychain"
   sudo apt-get update -y
   sudo apt-get upgrade -y
   sudo apt-get install -y $PACKAGES
