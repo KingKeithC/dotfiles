@@ -3,6 +3,6 @@ function rm_dotfile_backups
 end
 
 if status --is-interactive
-  keychain --eval --quiet -Q ~/.ssh/keithking ~/.ssh/ansibleagent | source
+  keychain --ignore-missing --eval --quiet -Q ~/.ssh/keithking ~/.ssh/ansibleagent ~/.ssh/AIX_Non-Prod ~/.ssh/AIX_QA ~/.ssh/AIX_PROD ~/.ssh/ASOP ~/.ssh/GROUPINFRA ~/.ssh/KeithKing-AH_GoAnywhere | source
 end
 
