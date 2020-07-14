@@ -13,7 +13,7 @@ CASE_SENSITIVE="true"
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_OSH_DAYS=13
@@ -73,7 +73,7 @@ plugins=(
 source $OSH/oh-my-bash.sh
 
 # Load computer specific environment variables
-LOCAL_ENVIRONMENT_FILE="${HOME}/.localenv"
+LOCAL_ENVIRONMENT_FILE="${HOME}/.localenv.sh"
 if [ -f "$LOCAL_ENVIRONMENT_FILE" ]; then
   source $LOCAL_ENVIRONMENT_FILE
 fi
