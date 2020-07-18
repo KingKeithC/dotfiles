@@ -36,3 +36,6 @@ link-in-home oh-my-bash
 link-in-home gitconfig
 link-in-home vimrc
 
+echo
+echo "Dotfile setup complete :)"
+
