@@ -15,27 +15,16 @@ CONFIG_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 # Using this as the config directory
 echo $CONFIG_DIR
 
-# Define a function to link a file into home from the config directory
-link-in-home() {
-	LINK=$HOME/.$1
-	DEST=$CONFIG_DIR/$1
+echo "Beginning dotfile setup..."
 
-	if [ -d $LINK ]; then
-		mv $LINK $LINK~
-	fi
-	
-	echo "Symlinking $LINK -> $DEST."
-	ln -fs -b $DEST $LINK
-}
+# Link local files to locations in the CONFIG_DIR
+# Directories
+ln -ivs --backup=numbered $CONFIG_DIR/oh-my-bash/ ~/.oh-my-bash/
 
+# Files
+ln -ivs --backup=numbered $CONFIG_DIR/bashrc ~/.bashrc
+ln -ivs --backup=numbered $CONFIG_DIR/gitconfig ~/.gitconfig
+ln -ivs --backup=numbered $CONFIG_DIR/vimrc ~/.vimrc
 
-echo "Begin dotfile setup..."
-
-link-in-home bashrc
-link-in-home oh-my-bash
-link-in-home gitconfig
-link-in-home vimrc
-
-echo
-echo "Dotfile setup complete :)"
+echo "Setup complete :)"
 
