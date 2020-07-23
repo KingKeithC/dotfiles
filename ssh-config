@@ -1,0 +1,7 @@
+Host *.kinglabs.lab
+  User keith.king
+  ForwardAgent yes
+
+Host *
+  ServerAliveInterval 60
+
