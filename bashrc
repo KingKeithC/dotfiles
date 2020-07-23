@@ -3,14 +3,16 @@ export OSH=${HOME}/.oh-my-bash
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
-OSH_THEME="font"
+OSH_THEME="axin"
+# These ones also look good:
+#   binaryanomaly
 
 # Uncomment the following line to use case-sensitive completion.
-CASE_SENSITIVE="true"
+CASE_SENSITIVE="false"
 
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 DISABLE_AUTO_UPDATE="true"
@@ -33,7 +35,7 @@ COMPLETION_WAITING_DOTS="true"
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -51,6 +53,9 @@ completions=(
   git
   composer
   ssh
+  docker
+  docker-compose
+  defaults
 )
 
 # Which aliases would you like to load? (aliases can be found in ~/.oh-my-bash/aliases/*)
@@ -70,7 +75,9 @@ plugins=(
   bashmarks
 )
 
-source $OSH/oh-my-bash.sh
+# General Environment Variables
+export EDITOR="vim"
+export PAGER="less"
 
 # Load computer specific environment variables
 LOCAL_ENVIRONMENT_FILE="${HOME}/.localenv.sh"
@@ -84,19 +91,19 @@ if which keychain &> /dev/null ; then
     echo "Loading Keychain Keys"
     eval `keychain --quiet --eval --nogui --attempts 3 $KEYCHAIN_KEYS`
   else
-    echo "Keychain is available, but the variable \$KEYCHAIN_KEYS was not set! Set the variable by editing ~/.localenv"
+    echo "keychain is available, but the variable \$KEYCHAIN_KEYS was not set! Set the variable by editing ~/.localenv.sh"
   fi
+else
+  echo "keychain is not installed."
 fi
-
-# Environment Variables
-export EDITOR="vim"
-export PAGER="less"
 
 # Aliases
 alias bashconfig="${EDITOR} ~/.bashrc"
 alias gitconfig="git config --global -e"
-alias localconfig="${EDITOR} ~/.localenv"
+alias localconfig="${EDITOR} ~/.localenv.sh"
 alias cl='clear'
 alias refreshenv='source ~/.bashrc'
-alias mcc='docker ps -q -f "name=abcraft_minecraft_1"'
+
+# Load oh-my-bash
+source $OSH/oh-my-bash.sh
 
