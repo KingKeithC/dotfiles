@@ -19,7 +19,7 @@ echo "Beginning dotfile setup..."
 
 # Link local files to locations in the CONFIG_DIR
 # Directories
-ln -ivs --backup=numbered $CONFIG_DIR/oh-my-bash/ ~/.oh-my-bash/
+ln -ivsT --backup=numbered $CONFIG_DIR/oh-my-bash/ ~/.oh-my-bash
 
 # Files
 ln -ivs --backup=numbered $CONFIG_DIR/bashrc ~/.bashrc
