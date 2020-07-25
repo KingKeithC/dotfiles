@@ -85,16 +85,19 @@ if [ -f "$LOCAL_ENVIRONMENT_FILE" ]; then
   source $LOCAL_ENVIRONMENT_FILE
 fi
 
-# Load SSH keys using Keychain
-if which keychain &> /dev/null ; then
-  if [ -n "$KEYCHAIN_KEYS" ]; then
-    echo "Loading Keychain Keys"
-    eval `keychain --quiet --eval --nogui --attempts 3 $KEYCHAIN_KEYS`
+# Load SSH keys using Keychain, but only if there are none in the agent already (such as if I logged in with Agent Forwarding enabled.)
+ssh-add -l 2> /dev/null; rc="$?"
+if [ "$rc" -eq 2 ]; then
+  if which keychain &> /dev/null ; then
+    if [ -n "$KEYCHAIN_KEYS" ]; then
+      echo "Loading Keychain Keys"
+      eval `keychain --quiet --eval --nogui --attempts 3 $KEYCHAIN_KEYS`
+    else
+      echo "keychain is available, but the variable \$KEYCHAIN_KEYS was not set! Set the variable by editing ~/.localenv.sh"
+    fi
   else
-    echo "keychain is available, but the variable \$KEYCHAIN_KEYS was not set! Set the variable by editing ~/.localenv.sh"
+    echo "keychain is not installed."
   fi
-else
-  echo "keychain is not installed."
 fi
 
 # Aliases
