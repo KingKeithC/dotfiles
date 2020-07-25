@@ -2,6 +2,11 @@ Host *.kinglabs.lab
   User keith.king
   ForwardAgent yes
 
+Host unifi.kinglabs.ca
+  User ubuntu
+  ForwardAgent yes
+
 Host *
   ServerAliveInterval 60
+  VisualHostKey yes
 
