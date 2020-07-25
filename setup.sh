@@ -27,5 +27,8 @@ ln -ivs --backup=numbered $CONFIG_DIR/gitconfig ~/.gitconfig
 ln -ivs --backup=numbered $CONFIG_DIR/vimrc ~/.vimrc
 ln -ivs --backup=numbered $CONFIG_DIR/ssh-config ~/.ssh/config
 
+# Remove all permissions from group and other in the config directory
+chmod -v go-rwx $CONFIG_DIR/*
+
 echo "Setup complete :)"
 
