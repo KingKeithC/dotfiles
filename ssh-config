@@ -2,9 +2,18 @@ Host *.kinglabs.lab
   User keith.king
   ForwardAgent yes
 
+Host canw-edm-ah*.groupinfra.com
+  User a-keith.king
+  ForwardAgent yes
+
 Host unifi.kinglabs.ca
   User ubuntu
   ForwardAgent yes
+
+Host *.health.alberta.ca
+  User kking1
+  ForwardAgent yes
+  ServerAliveInterval 60
 
 Host *
   ServerAliveInterval 60
