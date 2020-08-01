@@ -26,6 +26,9 @@ Host *.health.alberta.ca
   ServerAliveInterval 60
   VisualHostKey no
 
+Host github.com
+  VisualHostKey no
+
 Host *
   ServerAliveInterval 60
   VisualHostKey yes
