@@ -1,19 +1,30 @@
 Host *.kinglabs.lab
   User keith.king
   ForwardAgent yes
+  VisualHostKey no
+
+Host jump jump.kinglabs.ca
+  User keith.king
+  HostName kinglabs.ca
+  Port 2222
+  ForwardAgent yes
+  VisualHostKey no
 
 Host canw-edm-ah*.groupinfra.com
   User a-keith.king
   ForwardAgent yes
+  VisualHostKey no
 
 Host unifi.kinglabs.ca
   User ubuntu
   ForwardAgent yes
+  VisualHostKey no
 
 Host *.health.alberta.ca
   User kking1
   ForwardAgent yes
   ServerAliveInterval 60
+  VisualHostKey no
 
 Host *
   ServerAliveInterval 60
