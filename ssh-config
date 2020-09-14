@@ -10,6 +10,12 @@ Host jump jump.kinglabs.ca
   ForwardAgent yes
   VisualHostKey no
 
+Host jump jump.kinglabs.ca
+  HostName jump.kinglabs.ca
+  Port 2222
+  User keith.king
+  ForwardAgent yes
+
 Host canw-edm-ah*.groupinfra.com
   User a-keith.king
   ForwardAgent yes
