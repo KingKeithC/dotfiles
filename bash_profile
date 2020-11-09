@@ -107,5 +107,6 @@ fi
 alias cl='clear'
 
 # Load oh-my-bash
+echo "Loading oh-my-bash..."
 source $OSH/oh-my-bash.sh
 
