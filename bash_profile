@@ -86,14 +86,16 @@ if [ -f "$LOCAL_ENVIRONMENT_FILE" ]; then
 fi
 
 # Load SSH keys using Keychain, but only if there are none in the agent already (such as if I logged in with Agent Forwarding enabled.)
+# Keychain docs: https://www.funtoo.org/Keychain
 ssh-add -l 2> /dev/null; rc="$?"
 if [ "$rc" -eq 2 ]; then
   if which keychain &> /dev/null ; then
     if [ -n "$KEYCHAIN_KEYS" ]; then
-      echo "Loading Keychain Keys"
-      eval `keychain --quiet --eval --nogui --attempts 3 $KEYCHAIN_KEYS`
+      echo "Loading Keychain Keys..."
+      eval `keychain --agents ssh,gpg --quiet --eval --nogui --attempts 3 $KEYCHAIN_KEYS`
     else
-      echo "keychain is available, but the variable \$KEYCHAIN_KEYS was not set! Set the variable by editing ~/.localenv.sh"
+      echo "Loading Keychain Session..."
+      eval `keychain --agents ssh,gpg --quiet --eval --nogui`
     fi
   else
     echo "keychain is not installed."
@@ -101,11 +103,7 @@ if [ "$rc" -eq 2 ]; then
 fi
 
 # Aliases
-alias bashconfig="${EDITOR} ~/.bashrc"
-alias gitconfig="git config --global -e"
-alias localconfig="${EDITOR} ~/.localenv.sh"
 alias cl='clear'
-alias refreshenv='source ~/.bashrc'
 
 # Load oh-my-bash
 source $OSH/oh-my-bash.sh
