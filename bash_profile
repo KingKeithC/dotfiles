@@ -78,6 +78,7 @@ plugins=(
 # General Environment Variables
 export EDITOR="vim"
 export PAGER="less"
+export GPG_TTY="$(tty)"
 
 # Load computer specific environment variables
 LOCAL_ENVIRONMENT_FILE="${HOME}/.localenv.sh"
