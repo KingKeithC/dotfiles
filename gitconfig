@@ -14,7 +14,6 @@
   d = diff
 [push]
   default = simple
-	gpgSign = true
 [commit]
 	gpgSign = true
 [log]
