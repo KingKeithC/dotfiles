@@ -1,6 +1,7 @@
 [user]
   email = KingKeithC@gmail.com
   name = Keith King
+	signingkey = 377C578F259D0321
 [core]
   autocrlf = input
   whitespace = blank-at-eol,-blank-at-eof,space-before-tab,-indent-with-non-tab,tab-in-indent,-cr-at-eol
@@ -13,4 +14,11 @@
   d = diff
 [push]
   default = simple
+	gpgSign = true
+[commit]
+	gpgSign = true
+[log]
+	showSignature = true
+[merge]
+	verifySignatures = true
 
