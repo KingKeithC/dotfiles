@@ -9,7 +9,7 @@
 [color]
   ui = auto
 [alias]
-  plog = "log --color --graph --abbrev-commit --all --decorate=short --no-show-signature --pretty=format:'%Cred%h%Creset (%G?) - %C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
+  plog = "log --color --graph --abbrev-commit --all --decorate=short --no-show-signature --pretty=format:'%Cred%h%Creset (%G?) -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
   ls = status
   d = diff
 [push]
