@@ -26,6 +26,8 @@ ln -ivs --backup=numbered $CONFIG_DIR/bash_profile ~/.bash_profile
 ln -ivs --backup=numbered $CONFIG_DIR/gitconfig ~/.gitconfig
 ln -ivs --backup=numbered $CONFIG_DIR/vimrc ~/.vimrc
 ln -ivs --backup=numbered $CONFIG_DIR/ssh-config ~/.ssh/config
+ln -ivs --backup=numbered $CONFIG_DIR/gpg.conf ~/.gnupg/gpg.conf
+ln -ivs --backup=numbered $CONFIG_DIR/gpg-agent.conf ~/.gnupg/gpg-agent.conf
 
 # Remove all permissions from group and other in the config directory
 chmod -v go-rwx $CONFIG_DIR/*

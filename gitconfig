@@ -21,3 +21,5 @@
 [merge]
 	verifySignatures = true
 
+[gpg]
+	program = /usr/bin/gpg
