@@ -15,6 +15,16 @@ Host unifi.kinglabs.ca
   PubkeyAuthentication yes
   VisualHostKey no
 
+Host getfile getfile.health.alberta.ca
+  HostName getfile.health.alberta.ca
+  User keith.king
+  ServerAliveInterval 30
+  Ciphers aes256-cbc
+  IdentityFile ~/.ssh/KeithKing-AH_GoAnywhere
+  PasswordAuthentication yes
+  PubkeyAuthentication yes
+  VisualHostKey no
+
 Host canw-*
   HostName %h.groupinfra.com
   User a-keith.king
