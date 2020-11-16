@@ -80,6 +80,10 @@ export EDITOR="vim"
 export PAGER="less"
 export GPG_TTY="$(tty)"
 
+# General Aliases
+alias cl='clear'
+alias git_fetch_recursive='find . -type d -name .git -prune -print -execdir git fetch --all \;'
+
 # Load computer specific environment variables
 LOCAL_ENVIRONMENT_FILE="${HOME}/.localenv.sh"
 if [ -f "$LOCAL_ENVIRONMENT_FILE" ]; then
@@ -102,9 +106,6 @@ if [ "$rc" -eq 2 ]; then
     echo "keychain is not installed."
   fi
 fi
-
-# Aliases
-alias cl='clear'
 
 # Load oh-my-bash
 echo "Loading oh-my-bash..."
