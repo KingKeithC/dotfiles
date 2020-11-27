@@ -111,3 +111,7 @@ fi
 echo "Loading oh-my-bash..."
 source $OSH/oh-my-bash.sh
 
+# Load gh cli completions if it's installed
+if which gh &> /dev/null; then
+  eval "$(gh completion -s bash)"
+fi
