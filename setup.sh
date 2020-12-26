@@ -23,6 +23,7 @@ ln -ivsT --backup=numbered $CONFIG_DIR/oh-my-bash/ ~/.oh-my-bash
 
 # Files
 ln -ivs --backup=numbered $CONFIG_DIR/bash_profile ~/.bash_profile
+ln -ivs --backup=numbered $CONFIG_DIR/bashrc ~/.bashrc
 ln -ivs --backup=numbered $CONFIG_DIR/gitconfig ~/.gitconfig
 ln -ivs --backup=numbered $CONFIG_DIR/vimrc ~/.vimrc
 ln -ivs --backup=numbered $CONFIG_DIR/ssh-config ~/.ssh/config
