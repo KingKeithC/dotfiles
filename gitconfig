@@ -16,8 +16,6 @@
   default = simple
 [commit]
 	gpgSign = true
-[log]
-	showSignature = true
 [merge]
 	verifySignatures = true
 
