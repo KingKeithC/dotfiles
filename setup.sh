@@ -33,5 +33,8 @@ ln -ivs --backup=numbered $CONFIG_DIR/gpg-agent.conf ~/.gnupg/gpg-agent.conf
 # Remove all permissions from group and other in the config directory
 chmod -v go-rwx $CONFIG_DIR/*
 
+# Ask to prune old links
+read -p "Prune old symlink backups? (y/n): " RESPONSE; if [[ "$RESPONSE" == "y" ]]; then ls -l ~/.*~*; rm -i ~/.*~*; fi
+
 echo "Setup complete :)"
 
