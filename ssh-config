@@ -42,6 +42,8 @@ Host *.kinglabs.lab
   PasswordAuthentication no
   PubkeyAuthentication yes
   VisualHostKey no
+  DynamicForward 55789
+  RemoteForward /run/user/505200003/gnupg/S.gpg-agent ~/.gnupg/S.gpg-agent.extra 
 
 Host iedm2*
   HostName %h.health.alberta.ca
