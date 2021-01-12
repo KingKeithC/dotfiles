@@ -54,6 +54,9 @@ Host iedm2*
   PubkeyAuthentication yes
   VisualHostKey no
 
+Host github.com
+  VisualHostKey no
+
 Host *
   ForwardAgent no
   VisualHostKey yes
