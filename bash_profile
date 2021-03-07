@@ -83,8 +83,8 @@ export GPG_TTY="$(tty)"
 # General Aliases
 alias cl='clear'
 alias git_fetch_recursive='find . -type d -name .git -prune -print -execdir git fetch --all \;'
-alias ansible_decrypt='ansible-vault decrypt --vault-id kinglabs@~/ansible-kinglabs/kinglabs.vault'
-alias ansible_encrypt='ansible-vault encrypt --vault-id kinglabs@~/ansible-kinglabs/kinglabs.vault'
+alias ansible_decrypt='ansible-vault decrypt --vault-id kinglabs@~/kinglabs-infra/kinglabs.vault'
+alias ansible_encrypt='ansible-vault encrypt --vault-id kinglabs@~/kinglabs-infra/kinglabs.vault'
 which nvim &> /dev/null && alias vim='nvim'
 
 # Load computer specific environment variables
