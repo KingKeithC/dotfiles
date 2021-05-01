@@ -53,9 +53,6 @@ completions=(
   git
   composer
   ssh
-  docker
-  docker-compose
-  defaults
 )
 
 # Which aliases would you like to load? (aliases can be found in ~/.oh-my-bash/aliases/*)
@@ -72,7 +69,6 @@ aliases=(
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
-  bashmarks
 )
 
 # General Environment Variables
@@ -87,6 +83,9 @@ alias ansible_decrypt='ansible-vault decrypt --vault-id kinglabs@~/kinglabs-infr
 alias ansible_encrypt='ansible-vault encrypt --vault-id kinglabs@~/kinglabs-infra/kinglabs.vault'
 alias tf='terraform'
 which nvim &> /dev/null && alias vim='nvim'
+
+# Disable autocd
+shopt -u autocd
 
 # Load computer specific environment variables
 LOCAL_ENVIRONMENT_FILE="${HOME}/.localenv.sh"
