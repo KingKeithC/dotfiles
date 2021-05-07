@@ -114,7 +114,11 @@ fi
 echo "Loading oh-my-bash..."
 source $OSH/oh-my-bash.sh
 
-# Load gh cli completions if it's installed
-if which gh &> /dev/null; then
-  eval "$(gh completion -s bash)"
-fi
+# Load completions
+echo "Loading completions..."
+which gh        &> /dev/null && eval "$(gh completion -s bash)"
+which kubectl   &> /dev/null && source <(kubectl completion bash)
+which terraform &> /dev/null && complete -C $(which terraform) terraform
+which packer    &> /dev/null && complete -C $(which packer) packer
+
+echo "Done. Welcome to $(hostname), ${USER}!"
