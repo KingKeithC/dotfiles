@@ -120,5 +120,6 @@ which gh        &> /dev/null && eval "$(gh completion -s bash)"
 which kubectl   &> /dev/null && source <(kubectl completion bash)
 which terraform &> /dev/null && complete -C $(which terraform) terraform
 which packer    &> /dev/null && complete -C $(which packer) packer
+which flux	&> /dev/null && source <(flux completion bash)
 
 echo "Done. Welcome to $(hostname), ${USER}!"
