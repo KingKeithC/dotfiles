@@ -3,6 +3,8 @@
 # Exit immediately on errors
 set -e
 
+set
+
 # Determine directory of where script was run - https://stackoverflow.com/a/246128
 SOURCE="${BASH_SOURCE[0]}"
 while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
@@ -26,7 +28,7 @@ echo "Beginning dotfile setup..."
 
 # Link local files to locations in the CONFIG_DIR
 # Directories
-ln -vf $CONFIG_DIR/oh-my-bash/ ~/.oh-my-bash
+ln -vsT --backup=numbered $CONFIG_DIR/oh-my-bash/ ~/.oh-my-bash
 
 # Files
 ln -vs --backup=numbered $CONFIG_DIR/bash_profile ~/.bash_profile
@@ -40,7 +42,7 @@ ln -vs --backup=numbered $CONFIG_DIR/gpg-agent.conf ~/.gnupg/gpg-agent.conf
 # Remove all permissions from group and other in the config directory
 chmod -v go-rwx $CONFIG_DIR/*
 
-if [ -n "$REMOTE_CONTAINERS" ]; then
+if [ -z "$REMOTE_CONTAINERS" ]; then
 	# Ask to prune old links
 	read -p "Prune old symlink backups? (y/n): " RESPONSE; if [[ "$RESPONSE" == "y" ]]; then ls -l ~/.*~*; rm -i ~/.*~*; fi
 fi
