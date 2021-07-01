@@ -26,6 +26,7 @@ echo "Beginning dotfile setup..."
 
 # Link local files to locations in the CONFIG_DIR
 # Directories
+rm -rf ~/.oh-my-bash
 ln -vsfT --backup=numbered $CONFIG_DIR/oh-my-bash/ ~/.oh-my-bash
 
 # Files
