@@ -15,11 +15,18 @@ CONFIG_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 # Using this as the config directory
 echo $CONFIG_DIR
 
+echo "Update Submodules..."
+(
+	cd $CONFIG_DIR
+	git submodule init
+	git submodule update
+)
+
 echo "Beginning dotfile setup..."
 
 # Link local files to locations in the CONFIG_DIR
 # Directories
-ln -vsT --backup=numbered $CONFIG_DIR/oh-my-bash/ ~/.oh-my-bash
+ln -vf $CONFIG_DIR/oh-my-bash/ ~/.oh-my-bash
 
 # Files
 ln -vs --backup=numbered $CONFIG_DIR/bash_profile ~/.bash_profile
