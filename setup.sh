@@ -3,8 +3,6 @@
 # Exit immediately on errors
 set -e
 
-set
-
 # Determine directory of where script was run - https://stackoverflow.com/a/246128
 SOURCE="${BASH_SOURCE[0]}"
 while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
@@ -15,9 +13,9 @@ done
 CONFIG_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 
 # Using this as the config directory
-echo $CONFIG_DIR
+echo CONFIG_DIR=$CONFIG_DIR
 
-echo "Update Submodules..."
+echo "Updating Submodules..."
 (
 	cd $CONFIG_DIR
 	git submodule init
@@ -28,7 +26,7 @@ echo "Beginning dotfile setup..."
 
 # Link local files to locations in the CONFIG_DIR
 # Directories
-ln -vsT --backup=numbered $CONFIG_DIR/oh-my-bash/ ~/.oh-my-bash
+ln -vsfT --backup=numbered $CONFIG_DIR/oh-my-bash/ ~/.oh-my-bash
 
 # Files
 ln -vs --backup=numbered $CONFIG_DIR/bash_profile ~/.bash_profile
@@ -48,4 +46,3 @@ if [ -z "$REMOTE_CONTAINERS" ]; then
 fi
 
 echo "Setup complete :)"
-
