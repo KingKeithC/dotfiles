@@ -19,22 +19,24 @@ echo "Beginning dotfile setup..."
 
 # Link local files to locations in the CONFIG_DIR
 # Directories
-ln -ivsT --backup=numbered $CONFIG_DIR/oh-my-bash/ ~/.oh-my-bash
+ln -vsT --backup=numbered $CONFIG_DIR/oh-my-bash/ ~/.oh-my-bash
 
 # Files
-ln -ivs --backup=numbered $CONFIG_DIR/bash_profile ~/.bash_profile
-ln -ivs --backup=numbered $CONFIG_DIR/bashrc ~/.bashrc
-ln -ivs --backup=numbered $CONFIG_DIR/gitconfig ~/.gitconfig
-ln -ivs --backup=numbered $CONFIG_DIR/vimrc ~/.vimrc
-ln -ivs --backup=numbered $CONFIG_DIR/ssh-config ~/.ssh/config
-ln -ivs --backup=numbered $CONFIG_DIR/gpg.conf ~/.gnupg/gpg.conf
-ln -ivs --backup=numbered $CONFIG_DIR/gpg-agent.conf ~/.gnupg/gpg-agent.conf
+ln -vs --backup=numbered $CONFIG_DIR/bash_profile ~/.bash_profile
+ln -vs --backup=numbered $CONFIG_DIR/bashrc ~/.bashrc
+ln -vs --backup=numbered $CONFIG_DIR/gitconfig ~/.gitconfig
+ln -vs --backup=numbered $CONFIG_DIR/vimrc ~/.vimrc
+ln -vs --backup=numbered $CONFIG_DIR/ssh-config ~/.ssh/config
+ln -vs --backup=numbered $CONFIG_DIR/gpg.conf ~/.gnupg/gpg.conf
+ln -vs --backup=numbered $CONFIG_DIR/gpg-agent.conf ~/.gnupg/gpg-agent.conf
 
 # Remove all permissions from group and other in the config directory
 chmod -v go-rwx $CONFIG_DIR/*
 
-# Ask to prune old links
-read -p "Prune old symlink backups? (y/n): " RESPONSE; if [[ "$RESPONSE" == "y" ]]; then ls -l ~/.*~*; rm -i ~/.*~*; fi
+if [ -n "$REMOTE_CONTAINERS" ]; then
+	# Ask to prune old links
+	read -p "Prune old symlink backups? (y/n): " RESPONSE; if [[ "$RESPONSE" == "y" ]]; then ls -l ~/.*~*; rm -i ~/.*~*; fi
+fi
 
 echo "Setup complete :)"
 
