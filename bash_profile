@@ -1,125 +1,64 @@
-# Path to your oh-my-bash installation.
-export OSH=${HOME}/.oh-my-bash
-
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-bash is loaded.
-OSH_THEME="sexy"
-# These ones also look good:
-#   binaryanomaly
-
-# Uncomment the following line to use case-sensitive completion.
-CASE_SENSITIVE="false"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_OSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-HIST_STAMPS="yyyy-mm-dd"
-
-# Would you like to use another custom folder than $OSH/custom?
-# OSH_CUSTOM=/path/to/new-custom-folder
-
-# Which completions would you like to load? (completions can be found in ~/.oh-my-bash/completions/*)
-# Custom completions may be added to ~/.oh-my-bash/custom/completions/
-# Example format: completions=(ssh git bundler gem pip pip3)
-# Add wisely, as too many completions slow down shell startup.
-completions=(
-  git
-  composer
-  ssh
-)
-
-# Which aliases would you like to load? (aliases can be found in ~/.oh-my-bash/aliases/*)
-# Custom aliases may be added to ~/.oh-my-bash/custom/aliases/
-# Example format: aliases=(vagrant composer git-avh)
-# Add wisely, as too many aliases slow down shell startup.
-aliases=(
-  general
-)
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-bash/plugins/*)
-# Custom plugins may be added to ~/.oh-my-bash/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  git
-)
-
-# General Environment Variables
-export EDITOR="vim"
-export PAGER="less"
-export GPG_TTY="$(tty)"
-
-# General Aliases
-alias cl='clear'
-alias git_fetch_recursive='find . -type d -name .git -prune -print -execdir git fetch --all \;'
-alias ansible_decrypt='ansible-vault decrypt --vault-id kinglabs@~/kinglabs-infra/kinglabs.vault'
-alias ansible_encrypt='ansible-vault encrypt --vault-id kinglabs@~/kinglabs-infra/kinglabs.vault'
-alias tf='terraform'
-which nvim &> /dev/null && alias vim='nvim'
+# shellcheck disable=SC2034
 
 # Disable autocd
 shopt -u autocd
 
-# Load computer specific environment variables
-LOCAL_ENVIRONMENT_FILE="${HOME}/.localenv.sh"
-if [ -f "$LOCAL_ENVIRONMENT_FILE" ]; then
-  source $LOCAL_ENVIRONMENT_FILE
+# Local defaults for oh-my-bash
+OSH_THEME="sexy"
+CASE_SENSITIVE="false"
+HYPHEN_INSENSITIVE="true"
+DISABLE_AUTO_UPDATE="true"
+ENABLE_CORRECTION="true"
+COMPLETION_WAITING_DOTS="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
+HIST_STAMPS="yyyy-mm-dd"
+plugins=(git)
+#aliases=(general)
+#completions=(git composer ssh)
+
+# Default/Base Environment Variables
+# these will be overwritten by whatever is in the .env file
+export OSH=${HOME}/.oh-my-bash
+export EDITOR="vim"
+export PAGER="less"
+GPG_TTY="$(tty)"; export GPG_TTY
+
+# General Aliases
+alias tf='terraform'
+which nvim &> /dev/null && alias vim='nvim'
+
+# If dotenv is installed, try to import vars from dotent into the environment
+if which dotenv &> /dev/null; then
+  echo "dotenv on PATH, Loading..."
+  while read -r keypair; do export "$keypair"; done < <(dotenv list) &> /dev/null
 fi
 
+# TODO: Maybe remove this? It's an external dependancy so.....
 # Load SSH keys using Keychain, but only if there are none in the agent already (such as if I logged in with Agent Forwarding enabled.)
 # Keychain docs: https://www.funtoo.org/Keychain
-ssh-add -l 2> /dev/null; rc="$?"
-if [ "$rc" -eq 2 ]; then
-  if which keychain &> /dev/null ; then
-    if [ -n "$KEYCHAIN_KEYS" ]; then
-      echo "Loading Keychain Keys..."
-      eval `keychain --agents ssh,gpg --quiet --eval --nogui --attempts 3 $KEYCHAIN_KEYS`
-    else
-      echo "Loading Keychain Session..."
-      eval `keychain --agents ssh,gpg --quiet --eval --nogui`
-    fi
-  else
-    echo "keychain is not installed."
-  fi
-fi
+#if which keychain &> /dev/null ; then
+#  if [ -n "$KEYCHAIN_KEYS" ]; then
+#    echo "Loading Keychain Keys..."
+#    eval `keychain --agents ssh,gpg --quiet --eval --nogui --attempts 3 $KEYCHAIN_KEYS`
+#  else
+#    echo "Loading Keychain Session..."
+#    eval `keychain --agents ssh,gpg --quiet --eval --nogui`
+#  fi
+#else
+#  echo "keychain is not installed."
+#fi
 
-# Load oh-my-bash
+echo "Loading completions..."
+which gh        &> /dev/null && eval "$(gh completion -s bash)"
+which kubectl   &> /dev/null && source < <(kubectl completion bash)
+which flux      &> /dev/null && source < <(flux completion bash)
+which terraform &> /dev/null && complete -C "$(which terraform)" terraform
+which packer    &> /dev/null && complete -C "$(which packer)" packer
+
 echo "Loading oh-my-bash..."
 source $OSH/oh-my-bash.sh
 
-# Load completions
-echo "Loading completions..."
-which gh        &> /dev/null && eval "$(gh completion -s bash)"
-which kubectl   &> /dev/null && source <(kubectl completion bash)
-which terraform &> /dev/null && complete -C $(which terraform) terraform
-which packer    &> /dev/null && complete -C $(which packer) packer
-which flux	&> /dev/null && source <(flux completion bash)
+echo "Available SSH Keys:"
+ssh-add -l 2> /dev/null | awk '{print " -",$0}'
 
 echo "Done. Welcome to $(hostname), ${USER}!"
