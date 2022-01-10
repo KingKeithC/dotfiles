@@ -25,6 +25,7 @@ GPG_TTY="$(tty)"; export GPG_TTY
 
 # General Aliases
 alias tf='terraform'
+alias tg='terragrunt'
 which nvim &> /dev/null && alias vim='nvim'
 
 # If dotenv is installed, try to import vars from dotent into the environment
