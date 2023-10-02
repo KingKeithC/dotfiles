@@ -22,3 +22,7 @@
   verifySignatures = true
 [gpg]
   program = /usr/bin/gpg
+[credential]
+	helper = "!f() { /root/.vscode-server/bin/abd2f3db4bdb28f9e95536dfa84d8479f1eb312d/node /tmp/vscode-remote-containers-d9b8356f-7fff-4531-bd74-5d27010f1a0b.js git-credential-helper $*; }; f"
+[safe]
+	directory = *
