@@ -21,6 +21,7 @@ plugins=(git)
 export OSH=${HOME}/.oh-my-bash
 export EDITOR="vim"
 export PAGER="less"
+export SOPS_PGP_FP="9A7C81C51A2CCA341F7A8480377C578F259D0321"
 GPG_TTY="$(tty)"; export GPG_TTY
 
 # General Aliases
