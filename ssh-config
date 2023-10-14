@@ -1,63 +1,11 @@
-Host jumphost
-  User keith.king
-  HostName kinglabs.ca
-  Port 2222
-  ForwardAgent no
-  ServerAliveInterval 60
-  Compression yes
-  PasswordAuthentication no
-  PubkeyAuthentication yes
-  VisualHostKey no
-
-Host unifi.kinglabs.ca
-  User ubuntu
-  PasswordAuthentication no
-  PubkeyAuthentication yes
-  VisualHostKey no
-
-Host getfile getfile.health.alberta.ca
-  HostName getfile.health.alberta.ca
-  User keith.king
-  ServerAliveInterval 30
-  Ciphers aes256-cbc
-  IdentityFile ~/.ssh/KeithKing-AH_GoAnywhere
-  PasswordAuthentication yes
-  PubkeyAuthentication yes
-  VisualHostKey no
-
-Host canw-*
-  HostName %h.groupinfra.com
-  User a-keith.king
-  ForwardAgent yes
-  ServerAliveInterval 60
-  PasswordAuthentication no
-  PubkeyAuthentication yes
-  VisualHostKey no
-
-Host *.kinglabs.lab
-  User keith.king
-  ForwardAgent yes
-  ServerAliveInterval 60
-  ProxyJump jumphost
-  PasswordAuthentication no
-  PubkeyAuthentication yes
-  VisualHostKey no
-  DynamicForward 55789
-  RemoteForward /run/user/505200003/gnupg/S.gpg-agent /home/kking/.gnupg/S.gpg-agent.extra
-
-Host iedm2*
-  HostName %h.health.alberta.ca
-  User kking1
-  ForwardAgent yes
-  ServerAliveInterval 60
-  PasswordAuthentication no
-  PubkeyAuthentication yes
-  VisualHostKey no
-
 Host github.com
+  ForwardAgent no
+  VisualHostKey no
+
+Host 10.1.20.*
+  ForwardAgent yes
   VisualHostKey no
 
 Host *
   ForwardAgent no
   VisualHostKey yes
-
