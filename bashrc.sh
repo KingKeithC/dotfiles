@@ -23,22 +23,26 @@ plugins=(git)
 completions=(git ssh)
 
 
-export OSH="$HOME/.oh-my-bash"
-source "$OSH"/oh-my-bash.sh
-
-unset SSH_AGENT_PID
-
-if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
-  SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-  export SSH_AUTH_SOCK
-fi
-
-GPG_TTY="$(tty)"
-export GPG_TTY
-gpg-connect-agent updatestartuptty /bye >/dev/null
-
 export EDITOR="vim"
 export PAGER="less"
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
+
+export OSH="$HOME/.oh-my-bash"
+source "$OSH"/oh-my-bash.sh
+GPG_TTY="$(tty)"
+export GPG_TTY
+
+
+# Setup SSH/GPG Agents (if not in vscode, as vscode handles this for us)
+if [[ "$TERM_PROGRAM" != "vscode" ]]; then
+  unset SSH_AGENT_PID
+
+  if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+    SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+    export SSH_AUTH_SOCK
+  fi
+
+  gpg-connect-agent updatestartuptty /bye >/dev/null
+fi
