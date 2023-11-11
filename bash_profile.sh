@@ -1,6 +1,4 @@
-# shellcheck disable=SC2034
-
-echo "Welcome to $(hostname), ${USER}!"
+#! /usr/bin/env bash
 
 if [[ -f ~/.bashrc ]]; then
   source ~/.bashrc
