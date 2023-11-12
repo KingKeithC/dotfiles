@@ -23,6 +23,7 @@ plugins=(git)
 completions=(git ssh)
 
 
+export PATH="$PATH:$HOME/.local/bin"
 export EDITOR="vim"
 export PAGER="less"
 
