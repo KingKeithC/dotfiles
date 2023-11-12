@@ -4,25 +4,50 @@ font pango:IBM Plex Sans 12
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --autostart --environment i3
 
-# Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
-
+# Volume Control
 exec --no-startup-id pactl set-default-sink alsa_output.pci-0000_01_00.1.hdmi-stereo
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%     && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%     && $refresh_i3status
+bindsym XF86AudioMute        exec --no-startup-id pactl set-sink-mute   @DEFAULT_SINK@   toggle && $refresh_i3status
+bindsym XF86AudioMicMute     exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-
-# use these keys for focus, movement, and resize directions when reaching for
-# the arrows is not convenient
-set $up l
-set $down k
-set $left j
+# Common Key Bindings
+set $up    l
+set $down  k
+set $left  j
 set $right semicolon
 
-# Mod1=Alt, Mod4=Win
+# Main Modifier Key -  Mod1=Alt, Mod4=Win
 set $mod Mod4
+
+# Launcher
+bindsym $mod+d exec "rofi -show combi -modes combi -combi-modes window,drun,run,ssh"
+
+# Terminal
+bindsym $mod+Return exec --no-startup-id kitty
+
+title_align center
+default_border pixel
+hide_edge_borders smart
+smart_borders on
+popup_during_fullscreen smart
+workspace_auto_back_and_forth yes
+force_display_urgency_hint 1000 ms
+
+gaps inner 5
+gaps outer 3
+
+smart_gaps on
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+    status_command i3status
+    position top
+    tray_output primary
+    padding 0 10px 0 10px
+}
 
 # use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -33,14 +58,6 @@ tiling_drag modifier titlebar
 
 # kill focused window
 bindsym $mod+Shift+q kill
-
-# start dmenu (a program launcher)
-#bindsym $mod+d exec --no-startup-id dmenu_run
-# A more modern dmenu replacement is rofi:
-# bindsym $mod+d exec "rofi -modi drun,run -show drun"
-# There also is i3-dmenu-desktop which only displays applications shipping a
-# .desktop file. It is a wrapper around dmenu, so you need that installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
 bindsym $mod+$left focus left
@@ -140,60 +157,32 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
+set $resize_increment 2 px or 2 ppt
+
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+  # These bindings trigger as soon as you enter the resize mode
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym $left       resize shrink width 10 px or 10 ppt
-        bindsym $down       resize grow height 10 px or 10 ppt
-        bindsym $up         resize shrink height 10 px or 10 ppt
-        bindsym $right      resize grow width 10 px or 10 ppt
+  # Pressing left will shrink the window’s width.
+  # Pressing right will grow the window’s width.
+  # Pressing up will shrink the window’s height.
+  # Pressing down will grow the window’s height.
+  bindsym $left       resize shrink width   $resize_increment
+  bindsym $down       resize grow height    $resize_increment
+  bindsym $up         resize shrink height  $resize_increment
+  bindsym $right      resize grow width     $resize_increment
 
-        # same bindings, but for the arrow keys
-        bindsym Left        resize shrink width 10 px or 10 ppt
-        bindsym Down        resize grow height 10 px or 10 ppt
-        bindsym Up          resize shrink height 10 px or 10 ppt
-        bindsym Right       resize grow width 10 px or 10 ppt
+  # same bindings, but for the arrow keys
+  bindsym Left        resize shrink width   $resize_increment
+  bindsym Down        resize grow height    $resize_increment
+  bindsym Up          resize shrink height  $resize_increment
+  bindsym Right       resize grow width     $resize_increment
 
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
+  # back to normal: Enter or Escape or $mod+r
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+  bindsym $mod+r mode "default"
 }
 
 bindsym $mod+r mode "resize"
-
-# A more modern dmenu replacement is rofi:
-bindsym $mod+d exec "rofi -show combi -modes combi -combi-modes window,drun,run,ssh"
-bindsym $mod+Return exec --no-startup-id kitty
-
-title_align center
-
-default_border pixel
-hide_edge_borders smart
-smart_borders on
-popup_during_fullscreen smart
-workspace_auto_back_and_forth yes
-
-force_display_urgency_hint 1000 ms
-
-gaps inner 5
-gaps outer 3
-
-smart_gaps on
-
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-    status_command i3status
-    position top
-    tray_output primary
-    padding 0 10px 0 10px
-}
