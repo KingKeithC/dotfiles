@@ -1,0 +1,49 @@
+general {
+  colors = true
+  interval = 5
+}
+
+order += "disk /"
+order += "disk /mnt/media"
+order += "ethernet eno1"
+order += "memory"
+order += "load"
+order += "tztime local"
+order += "volume main"
+
+ethernet eno1 {
+  format_up = "E: %ip (%speed)"
+  format_down = "E: down"
+}
+
+tztime local {
+  format = "%Y-%m-%d %H:%M:%S"
+}
+
+load {
+  format = "1/5/15 load %1min/%5min/%15min"
+}
+
+memory {
+  format = "%free Free"
+  threshold_degraded = "20%"
+  format_degraded = "MEMORY: %free"
+}
+
+disk "/" {
+  format = "(/) %percentage_used (%used) used of %total"
+}
+
+disk "/mnt/media" {
+  format = "(/mnt/media) %percentage_used (%used) used of %total"
+}
+
+read_file uptime {
+  path = "/proc/uptime"
+}
+
+volume main {
+  format = "♪: %volume"
+  format_muted = "♪: muted (%volume)"
+  device = "pulse:alsa_output.pci-0000_01_00.1.hdmi-stereo"
+}
