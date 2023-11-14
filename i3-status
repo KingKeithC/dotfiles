@@ -5,45 +5,53 @@ general {
 
 order += "disk /"
 order += "disk /mnt/media"
+order += "read_file uptime"
 order += "ethernet eno1"
 order += "memory"
 order += "load"
-order += "tztime local"
 order += "volume main"
+order += "tztime local"
 
 ethernet eno1 {
-  format_up = "E: %ip (%speed)"
-  format_down = "E: down"
+  format_up = "🖧 %ip (%speed)"
+  format_down = "🖧 down"
 }
 
 tztime local {
-  format = "%H:%M on %a, %B %d"
+  format = "%a, %B %d at %H:%M"
 }
 
 load {
-  format = "1/5/15 load %1min/%5min/%15min"
+  format = "1-min load: %1min"
 }
 
 memory {
-  format = "%free Free"
+  format = "🎞 %free Free (%percentage_used Used)"
   threshold_degraded = "20%"
   format_degraded = "MEMORY: %free"
 }
 
 disk "/" {
-  format = "(/) %percentage_used (%used) used of %total"
+  format = "/ 🗁 %percentage_used (%used) used of %total"
+  low_threshold = 15
+  threshold_type = percentage_free
+  format_below_threshold = "LOW SPACE: (/) %percentage_free free (%free) of %total"
 }
 
 disk "/mnt/media" {
-  format = "(/mnt/media) %percentage_used (%used) used of %total"
+  format = "/mnt/media 🗁 %percentage_used (%used) used of %total"
+  low_threshold = 15
+  threshold_type = percentage_free
+  format_below_threshold = "LOW SPACE: (/mnt/media) %percentage_free free (%free) of %total"
 }
 
 read_file uptime {
   path = "/proc/uptime"
+  format = "uptime & sum cpu idletime = %content"
 }
 
 volume main {
-  format = "♪: %volume"
-  format_muted = "♪: muted (%volume)"
+  format = "🔊 %volume"
+  format_muted = "🔇 (%volume)"
   device = "pulse:alsa_output.pci-0000_01_00.1.hdmi-stereo"
 }

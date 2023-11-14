@@ -43,10 +43,17 @@ smart_gaps on
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-    status_command i3status
-    position top
-    tray_output primary
-    padding 0 10px 0 10px
+    status_command    i3status
+    position          top
+    tray_output       primary
+    output            DP-0
+    font              pango:Iosevka Fixed 14
+    # font              pango:Montserrat 14
+    separator_symbol  " <<&>> "
+
+    # top right bottom left
+    padding         0 10px 0 10px
+
 }
 
 # use Mouse+$mod to drag floating windows to their wanted position
