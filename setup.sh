@@ -18,15 +18,17 @@ echo "-- Installing Oh-my-bash --"
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)" --unattended
 
 echo "-- Linking Dotfiles --"
-mkdir -p ~/.ssh ~/.gnupg ~/.config/htop
-$LINK_CMD "$DOTFILES/bash_profile.sh" ~/.bash_profile
-$LINK_CMD "$DOTFILES/bashrc.sh"       ~/.bashrc
-$LINK_CMD "$DOTFILES/gitconfig"       ~/.gitconfig
-$LINK_CMD "$DOTFILES/vimrc"           ~/.vimrc
-$LINK_CMD "$DOTFILES/ssh-config"      ~/.ssh/config
-$LINK_CMD "$DOTFILES/gpg.conf"        ~/.gnupg/gpg.conf
-$LINK_CMD "$DOTFILES/gpg-agent.conf"  ~/.gnupg/gpg-agent.conf
-$LINK_CMD "$DOTFILES/htoprc"          ~/.config/htop/htoprc
+mkdir -p ~/.ssh ~/.gnupg ~/.config/htop ~/.config/polybar
+
+$LINK_CMD "$DOTFILES/bash_profile.sh"     ~/.bash_profile
+$LINK_CMD "$DOTFILES/bashrc.sh"           ~/.bashrc
+$LINK_CMD "$DOTFILES/gitconfig"           ~/.gitconfig
+$LINK_CMD "$DOTFILES/vimrc"               ~/.vimrc
+$LINK_CMD "$DOTFILES/ssh-config"          ~/.ssh/config
+$LINK_CMD "$DOTFILES/gpg.conf"            ~/.gnupg/gpg.conf
+$LINK_CMD "$DOTFILES/gpg-agent.conf"      ~/.gnupg/gpg-agent.conf
+$LINK_CMD "$DOTFILES/htoprc"              ~/.config/htop/htoprc
+$LINK_CMD "$DOTFILES/polybar-config.ini"  ~/.config/polybar/config.ini
 
 
 # i3 Config
