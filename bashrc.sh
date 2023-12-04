@@ -10,7 +10,8 @@ esac
 shopt -u autocd
 
 # Local defaults for oh-my-bash
-OSH_THEME="sexy"
+export OSH="$HOME/.oh-my-bash"
+OSH_THEME="mairan"
 CASE_SENSITIVE="false"
 HYPHEN_INSENSITIVE="true"
 DISABLE_AUTO_UPDATE="true"
@@ -22,18 +23,17 @@ plugins=(git)
 #aliases=(general)
 completions=(git ssh)
 
-
 export PATH="$PATH:$HOME/.local/bin"
 export EDITOR="vim"
 export PAGER="less"
 
-alias ls='ls --color=auto'
-alias grep='grep --color=auto'
-
-export OSH="$HOME/.oh-my-bash"
-source "$OSH"/oh-my-bash.sh
 GPG_TTY="$(tty)"
 export GPG_TTY
+
+which nvim &> /dev/null && alias vim=nvim
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias pup='PATH="$(pwd)/.venv/bin:$PATH" VIRTUAL_ENV="$(pwd)/.venv" sops exec-env ../secret_env.yml bash'
 
 
 # Setup SSH/GPG Agents (if not in vscode, as vscode handles this for us)
@@ -47,3 +47,6 @@ if [[ "$TERM_PROGRAM" != "vscode" ]]; then
 
   gpg-connect-agent updatestartuptty /bye >/dev/null
 fi
+
+source "$OSH"/oh-my-bash.sh
+
