@@ -24,3 +24,5 @@
   program = /usr/bin/gpg
 [safe]
 	directory = *
+[init]
+	defaultBranch = main
