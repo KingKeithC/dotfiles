@@ -4,6 +4,9 @@ font pango:IBM Plex Sans 12
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --autostart --environment i3
 
+# Desktop background
+exec --no-startup-id ~/.fehbg
+
 # Volume Control
 exec --no-startup-id pactl set-default-sink alsa_output.pci-0000_01_00.1.hdmi-stereo
 set $refresh_i3status killall -SIGUSR1 i3status
