@@ -33,6 +33,10 @@ bindsym $mod+d exec "rofi -show combi -modes combi -combi-modes window,drun,run,
 # Terminal
 bindsym $mod+Return exec --no-startup-id kitty
 
+# Browser
+bindsym $mod+Shift+f exec firefox
+
+
 title_align center
 default_border pixel
 hide_edge_borders smart
