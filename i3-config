@@ -20,6 +20,10 @@ exec --no-startup-id pasystray
 exec --no-startup-id polybar
 exec --no-startup-id steam -silent
 
+# Exit i3
+bindsym $mod+Shift+e exec i3-msg exit
+
+
 # Common Key Bindings
 set $up    l
 set $down  k
